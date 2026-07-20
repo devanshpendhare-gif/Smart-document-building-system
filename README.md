@@ -1,1 +1,0 @@
-# Smart-document-building-system
