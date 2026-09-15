@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset password | DocBuilder India</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="forgot-password.css">
+</head>
+<body>
+    <main class="forgot-page">
+        <header class="brand">
+            <img src="1787738623487-Picsart-BackgroundRemover.png" alt="DocBuilder India logo" class="brand-logo logo-img">
+            <p>DocBuilder India</p>
+        </header>
+
+        <section class="forgot-card" aria-labelledby="forgot-title">
+            <a class="back-link" href="index.html">&larr; Back to login</a>
+            <div class="success-message" id="success-message" role="status" aria-live="polite" hidden>
+                <strong>Password changed successfully.</strong>
+                <a href="index.html">Go to login</a>
+            </div>
+            <div class="card-heading">
+                <span class="heading-icon" aria-hidden="true">&#128273;</span>
+                <h1 id="forgot-title">Forgot password?</h1>
+                <p>Enter your email and we will send you a one-time password to reset your account.</p>
+            </div>
+
+            <form action="#" method="post" id="forgot-password-form">
+                <label for="email">Email address</label>
+                <div class="input-wrap">
+                    <span aria-hidden="true">&#9993;</span>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+
+                <button type="button" class="secondary-button" id="send-otp">Send OTP</button>
+                <p class="form-status" id="otp-status" role="status" aria-live="polite"></p>
+
+                <fieldset id="otp-fields" disabled>
+                    <legend>Enter the 6-digit OTP</legend>
+                    <div class="otp-group">
+                        <input type="text" inputmode="numeric" maxlength="1" name="otp1" aria-label="OTP digit 1" required>
+                        <input type="text" inputmode="numeric" maxlength="1" name="otp2" aria-label="OTP digit 2" required>
+                        <input type="text" inputmode="numeric" maxlength="1" name="otp3" aria-label="OTP digit 3" required>
+                        <input type="text" inputmode="numeric" maxlength="1" name="otp4" aria-label="OTP digit 4" required>
+                        <input type="text" inputmode="numeric" maxlength="1" name="otp5" aria-label="OTP digit 5" required>
+                        <input type="text" inputmode="numeric" maxlength="1" name="otp6" aria-label="OTP digit 6" required>
+                    </div>
+                </fieldset>
+
+                <label for="new-password">New password</label>
+                <input class="text-input" type="password" id="new-password" name="new-password" placeholder="Create a new password" autocomplete="new-password" required>
+
+                <label for="confirm-password">Confirm password</label>
+                <input class="text-input" type="password" id="confirm-password" name="confirm-password" placeholder="Repeat your new password" autocomplete="new-password" required>
+    
+                <button type="submit" class="primary-button" id="reset-button" disabled>Reset password</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        const form = document.querySelector('#forgot-password-form');
+        const email = document.querySelector('#email');
+        const sendOtpButton = document.querySelector('#send-otp');
+        const otpFields = document.querySelector('#otp-fields');
+        const otpInputs = [...document.querySelectorAll('.otp-group input')];
+        const otpStatus = document.querySelector('#otp-status');
+        const resetButton = document.querySelector('#reset-button');
+        const successMessage = document.querySelector('#success-message');
+        let demoOtp = '';
+
+        sendOtpButton.addEventListener('click', () => {
+            if (!email.checkValidity()) {
+                email.reportValidity();
+                return;
+            }
+
+            demoOtp = String(Math.floor(100000 + Math.random() * 900000));
+            otpFields.disabled = false;
+            resetButton.disabled = false;
+            otpInputs[0].focus();
+            otpStatus.textContent = `OTP sent. Demo code: ${demoOtp}`;
+            otpStatus.className = 'form-status success';
+            sendOtpButton.textContent = 'Resend OTP';
+        });
+
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/\D/g, '');
+                if (input.value && otpInputs[index + 1]) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (event) => {
+                if (event.key === 'Backspace' && !input.value && otpInputs[index - 1]) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const enteredOtp = otpInputs.map((input) => input.value).join('');
+
+            if (enteredOtp !== demoOtp) {
+                otpStatus.textContent = 'That OTP is incorrect. Please try again.';
+                otpStatus.className = 'form-status error';
+                otpInputs[0].focus();
+                return;
+            }
+
+            if (form.elements['new-password'].value !== form.elements['confirm-password'].value) {
+                otpStatus.textContent = 'Your passwords do not match.';
+                otpStatus.className = 'form-status error';
+                return;
+            }
+
+            otpStatus.textContent = 'Password reset verified successfully.';
+            otpStatus.className = 'form-status success';
+            successMessage.hidden = false;
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+</body>
+</html>
