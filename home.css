@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #0a1224;
+     min-height:100vh;
+    display:flex;
+    justify-content:center;
+    font-family:'Inter', sans-serif;
+}
+
+.main{
+    width:100%;
+    max-width:1100px;
+    padding: 40px 20px 80px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* Badge */
+#head h5{
+    font-size:11px;
+    letter-spacing:2.5px;
+    color:#d4a853;
+    background: rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    padding:9px 22px;
+    border-radius:100px;
+}
+#head h5::before{
+    content:'✦ ';
+    margin-right:4px;
+}
+
+/* Heading */
+.text h1{
+    font-family:'playfair Display', serif;
+    font-size:65px;
+    font-weight:500;
+    color:#ffffff;
+    text-align:center;
+    margin-top:20px;
+    line-height:1;
+}
+
+.text1 h1{
+    font-family:'Playfair Display', serif;
+    font-size:62px;
+    font-weight:500;
+    font-style:italic;
+    color:#c68c4a;
+    text-align:center;
+    line-height:1.1;
+}
+
+/* Subtitle */
+.p{
+    max-width:600px;
+    text-align:center;
+    color:#7d9bbf;
+    font-size:16px;
+    line-height:1.6;
+    margin-top:22px;
+    margin-bottom:55px;
+}
+
+/* 3 Boxes  -  Row Layout */
+.box{
+    width:100%;
+    display:flex;
+    gap:20px;
+    justify-content:center;
+}
+
+.box1,  .box2, .box3{
+flex:1;
+max-width:330px;
+background: #151f35;
+border:1px solid rgba(255,255,255,0.12);
+border-radius:18px;
+padding:24px 22px 20px;
+transition:0.5s;
+}
+
+.box1:hover, .box2:hover, .box3:hover{
+    transform:translateY(-6px);
+    border-color: rgba(255,255,255,0.25);
+}
+
+
+/* Icons */
+.icon{
+    width:44px;
+    height:44px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:16px;
+}
+.icon-orange{ background: rgba(198,140,74,0.14); color:#c68c4a; }
+.icon-blue{ background: rgba(125,155,191,0.14); color:#7d9bbf; }
+.icon-purple{ background: rgba(168,130,221,0.14); color:#a882dd; }
+
+
+/* Card Text */
+.boxhead p{
+    font-size:19px;
+    font-weight:800;
+    color:#ffffff;
+    letter-spacing:0.5px;
+    margin-bottom:8px;
+}
+.boxtext p{
+    font-size:13.5px;
+    line-height:1.6;
+    color:#7d9bbf;
+    min-height:72px;
+}
+
+
+
+/* Footer Link */
+.footer{ margin-top:18px; }
+.footer p{
+    font-size:13px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+}
+.footer p::after{
+    content:'→';
+    font-size:14px;
+    transition:0.3s;
+}
+.footer p:hover::after{ transform:translateX(4px); }
+
+.box1 .footer p{ color:#c68c4a; }
+.box2 .footer p{ color:#7d9bbf; }
+.box3 .footer p{ color:#a882dd; }
+
+
+* Responsive - mobile becomes column */
+@media /(max-width: 900px){
+    .box{ flex-direction:column; align-items:center; }
+    .box1, .box2, .box3{ max-width:400px; width:100%; }
+    .text h1, .text1 h1{ font-size:42px; }
+}
