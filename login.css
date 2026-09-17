@@ -339,7 +339,7 @@
   width: 260px;
   margin: 20px 0 0;
 }
-.login-button button {
+.login-button a {
   background-color: #f59e0b; 
   color: #ffffff; 
   border: none; 
@@ -351,7 +351,7 @@
   width: 260px;
   margin: 10px 0;
 }
-.login-button button:hover {
+.login-button a:hover {
   background-color: #e64c1d; 
   animation: shake 0.5s;
   animation-iteration-count: infinite;
